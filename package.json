@@ -1,0 +1,25 @@
+{
+  "name": "node-tdd-starter-app",
+  "version": "1.0.0",
+  "description": "A starter app for writing a Node app in the TDD style.",
+  "main": "src/server.js",
+  "scripts": {
+    "lint": "eslint .",
+    "start": "node src/server.js",
+    "test": "npm install && npm run lint && mocha test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farooqam/node-tdd-starter.git"
+  },
+  "author": "Farooq Mahmud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farooqam/node-tdd-starter.git"
+  },
+  "homepage": "https://github.com/farooqam/node-tdd-starter.git",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
