@@ -18,10 +18,14 @@
     "url": "https://github.com/farooqam/node-tdd-starter.git"
   },
   "homepage": "https://github.com/farooqam/node-tdd-starter.git",
-  "dependencies": {},
+  "dependencies": {
+    "mongoose": "^5.3.4"
+  },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.7.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "sinon": "^7.0.0",
+    "sinon-mongoose": "^2.2.1"
   }
 }
