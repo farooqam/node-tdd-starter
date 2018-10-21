@@ -2,14 +2,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const bookSchema = Schema({
-    "sku": {
-        "type": String
-    },
-    "title": {
-        "type": String
-    }
+    "sku": String,
+    "title": String
 });
 
-const BookModel = mongoose.model("BookModel", bookSchema);
+bookSchema.methods.findBook = (sku) => {
+    this.find({"sku": sku}, (_, book) => {
+        return book;
+    });
+};
 
-module.exports = BookModel;
+const Book = mongoose.model("Book", bookSchema);
+
+module.exports = Book;

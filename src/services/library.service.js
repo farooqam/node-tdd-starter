@@ -1,11 +1,15 @@
-const Book = require("../models/book.model");
+const Book = require("../schemas/book.schema");
 
 function LibraryService() {
 
 }
 
-LibraryService.prototype.lookup = function(sku) {
-    return new Book(sku, "Moby Dick");
+LibraryService.prototype.lookup = (sku) => {
+    //const book = Book.findBook(sku);
+    //return book;
+    Book.find({"sku": sku}, (_, book) => {
+        return book;
+    });
 };
 
 module.exports = LibraryService;
