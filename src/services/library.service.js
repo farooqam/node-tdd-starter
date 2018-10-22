@@ -5,11 +5,11 @@ function LibraryService() {
 }
 
 LibraryService.prototype.lookup = (sku) => {
-    //const book = Book.findBook(sku);
-    //return book;
-    Book.find({"sku": sku}, (_, book) => {
-        return book;
-    });
+    return Book.find({"sku": sku}).exec();
 };
 
+LibraryService.prototype.add = (sku, title, cb) => {
+    const book = new Book({"sku": sku, "title": title});
+    return book.save(cb(book));
+};
 module.exports = LibraryService;

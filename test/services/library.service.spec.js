@@ -11,18 +11,40 @@ describe("Library service", () => {
             const sku = "1234";
             const title = "Treasure Island";
             const bookModelMock = sinon.mock(BookModel);
-            bookModelMock.expects("find").withArgs({"sku": sku}).yields(null, {"sku": sku, "title": title});
+            bookModelMock.expects("find")
+                .withArgs({"sku": sku})
+                .chain("exec")
+                .resolves({"sku": sku, "title": title});
 
             const service = new LibraryService();
-            const book = service.lookup(sku);
+            service.lookup(sku).then((book) => {
+                bookModelMock.verify();
+                bookModelMock.restore();
 
-            bookModelMock.verify();
-            bookModelMock.restore();
+                expect(book.sku).to.equal(sku);
+                expect(book.title).to.equal(title);
 
-            expect(book.sku).to.equal(sku);
-            expect(book.title).to.equal(title);
+                done();
+            });
+        });
+    });
 
-            done();
+    describe("Add book", () => {
+        it("Should return the book that was added", (done) => {
+            const sku = "1234";
+            const title = "Treasure Island";
+            const bookModelMock = sinon.mock(BookModel);
+
+            const service = new LibraryService();
+            service.add(sku, title, (book) => {
+                bookModelMock.verify();
+                bookModelMock.restore();
+
+                expect(book.sku).to.equal(sku);
+                expect(book.title).to.equal(title);
+
+                done();
+            });
         });
     });
 });

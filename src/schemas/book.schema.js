@@ -6,12 +6,6 @@ const bookSchema = Schema({
     "title": String
 });
 
-/* bookSchema.methods.findBook = (sku) => {
-    this.find({"sku": sku}, (_, book) => {
-        return book;
-    });
-}; */
-
 const Book = mongoose.model("Book", bookSchema);
 
 module.exports = Book;
