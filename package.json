@@ -19,7 +19,10 @@
   },
   "homepage": "https://github.com/farooqam/node-tdd-starter.git",
   "dependencies": {
-    "mongoose": "^5.3.4"
+    "http-status": "^1.2.0",
+    "mongoose": "^5.3.4",
+    "restify": "^7.2.1",
+    "restify-router": "^0.5.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
@@ -27,6 +30,7 @@
     "factory-girl": "^5.0.2",
     "mocha": "^5.2.0",
     "sinon": "^7.0.0",
-    "sinon-mongoose": "^2.2.1"
+    "sinon-mongoose": "^2.2.1",
+    "supertest": "^3.3.0"
   }
 }
