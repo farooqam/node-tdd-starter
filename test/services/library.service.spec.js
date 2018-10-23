@@ -4,6 +4,7 @@ const sinon = require("sinon");
 require("sinon-mongoose");
 const BookModel = require("../../src/schemas/book.schema");
 const LibraryService = require("../../src/services/library.service");
+const factory = require("factory-girl").factory;
 
 describe("Library service", () => {
     describe("Lookup", () => {
@@ -33,17 +34,24 @@ describe("Library service", () => {
         it("Should return the book that was added", (done) => {
             const sku = "1234";
             const title = "Treasure Island";
-            const bookModelMock = sinon.mock(BookModel);
+            factory.define("book", BookModel, {"sku": sku, "title": title});
 
-            const service = new LibraryService();
-            service.add(sku, title, (book) => {
-                bookModelMock.verify();
-                bookModelMock.restore();
+            factory.build("book").then((doc) => {
+                const book = doc;
+                const bookMock = sinon.mock(book);
+                bookMock.expects("save").resolves(book);
 
-                expect(book.sku).to.equal(sku);
-                expect(book.title).to.equal(title);
+                const service = new LibraryService();
+                service.add(book).then((b) => {
+                    bookMock.verify();
+                    bookMock.restore();
 
-                done();
+                    expect(b.sku).to.equal(sku);
+                    expect(b.title).to.equal(title);
+
+                    done();
+                });
+
             });
         });
     });
